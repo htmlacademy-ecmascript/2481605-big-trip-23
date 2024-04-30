@@ -1,5 +1,4 @@
 import CreatingFormView from '../view/creating-form-view.js';
-import EditingFormView from '../view/editing-form-view.js';
 import FilterView from '../view/filter-view.js';
 import SortingView from '../view/sorting-view.js';
 import WayPointView from '../view/way-point-view.js';
@@ -42,16 +41,11 @@ export default class Presenter {
     render (new CreatingFormView(), this.wayPointList, RenderPosition.AFTERBEGIN);
   }
 
-  renderEditingForm () {
-    render (new EditingFormView(), this.wayPointList, RenderPosition.AFTERBEGIN);
-  }
-
   init() {
     this.renderTripInfoView();
     this.renderTripFilter();
     this.renderSortFilter();
     this.renderWayPoint();
-    this.renderEditingForm();
     this.renderCreatingForm();
   }
 }
