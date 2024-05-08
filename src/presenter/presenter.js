@@ -7,13 +7,13 @@ import {render, RenderPosition} from '../render';
 
 export default class Presenter {
 
-  constructor() {
+  constructor(pointModel) {
     this.pageHeaderElement = document.querySelector('.page-header');
     this.tripMainElement = this.pageHeaderElement.querySelector('.trip-main');
     this.tripControlsFiltersElement = this.pageHeaderElement.querySelector('.trip-controls__filters');
     this.pageMainElement = document.querySelector('.page-main');
     this.tripEventsElement = this.pageMainElement.querySelector('.trip-events');
-
+    this.pointModel = pointModel;
     this.wayPointList = document.createElement('ul');
     this.wayPointList.classList.add('trip-events__list');
     this.tripEventsElement.appendChild(this.wayPointList);
@@ -32,9 +32,12 @@ export default class Presenter {
   }
 
   renderWayPoint () {
-    for (let i = 0; i < 3; i++){
-      render (new WayPointView(), this.wayPointList);
-    }
+    const points = this.pointModel.getPoints();
+    const destinations = this.pointModel.getDestinations();
+    const offers = this.pointModel.getOffers();
+    points.forEach((point) => {
+      render (new WayPointView(point, destinations, offers), this.wayPointList);
+    });
   }
 
   renderCreatingForm () {
